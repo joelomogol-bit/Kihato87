@@ -2,9 +2,36 @@
 
 import React, { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
-import { Sparkles, ArrowRight, Calendar, CheckCircle, Instagram, Phone, ShoppingBag, Layers } from "lucide-react"
+import { Sparkles, ArrowRight, Calendar, CheckCircle, ShoppingBag } from "lucide-react"
 
-// --- INTERNAL COMPONENT: BOOKING FORM ---
+// --- WIG SHOP DATA CONFIGURATION (3 SLOTS) ---
+const shopItems = [
+  { 
+    title: "Luxury Vietnamese Bundles", 
+    subtitle: "Raw Human Hair", 
+    img: "/shop1.jpg" 
+  },
+  { 
+    title: "Ultra Thin HD Frontal Wig", 
+    subtitle: "13x4 / 13x6 Grid", 
+    img: "/shop2.jpg" 
+  },
+  { 
+    title: "Premium Bone Straight Unit", 
+    subtitle: "Pre-Plucked Double Drawn", 
+    img: "/shop3.jpg" 
+  }
+]
+
+// --- PORTFOLIO GALLERY DATA CONFIGURATION (4 SLOTS) ---
+const galleryItems = [
+  { title: "Bridal Glow Makeup", img: "/gallery1.jpg" },
+  { title: "Precision Melted Lace Installation", img: "/gallery2.jpg" },
+  { title: "Luxury Volume Weave Extensions", img: "/gallery3.jpg" },
+  { title: "Studio Editorial Photo Styling", img: "/gallery4.jpg" }
+]
+
+// --- WHATSAPP BOOKING INTEGRATION ARCHITECTURE ---
 function BookingForm() {
   const searchParams = useSearchParams()
   const [formData, setFormData] = useState({ name: "", phone: "", date: "", time: "", notes: "" })
@@ -25,7 +52,7 @@ function BookingForm() {
     
     setIsSubmitted(true)
     setTimeout(() => {
-      window.open(`https://wa.me/254116322757?text=${encodeURIComponent(baseText + notesText)}`, "_blank")
+      window.open(`https://wa.me/2541166628626?text=${encodeURIComponent(baseText + notesText)}`, "_blank")
       setIsSubmitted(false)
     }, 1200)
   }
@@ -76,19 +103,12 @@ function BookingForm() {
   )
 }
 
-// --- MAIN COMBINED PAGE EXPORT ---
+// --- MAIN STRUCTURAL HOMEPAGE EXPORT ---
 export default function Home() {
-  const galleryItems = [
-    { title: "Bridal Glow Makeup", img: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&q=80&w=600" },
-    { title: "Precision Melted Lace Installation", img: "https://images.unsplash.com/photo-1605497746444-ac9da5848ba7?auto=format&fit=crop&q=80&w=600" },
-    { title: "Luxury Volume Weave Extensions", img: "https://images.unsplash.com/photo-1595959183075-c1d09e77b94b?auto=format&fit=crop&q=80&w=600" },
-    { title: "Studio Editorial Photo Styling", img: "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=600" }
-  ]
-
   return (
     <div className="w-full bg-[#050505] text-white">
       
-      {/* 1. HERO SECTION */}
+      {/* 1. HERO MAIN HEADER */}
       <section className="mx-auto max-w-6xl w-full px-6 pt-16 pb-24 grid md:grid-cols-2 items-center gap-12 min-h-[85vh]">
         <div className="space-y-6">
           <div className="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/40 px-4 py-1.5">
@@ -114,7 +134,7 @@ export default function Home() {
           </div>
         </div>
         <div className="relative aspect-[4/5] rounded-2xl border border-zinc-800 bg-zinc-900 p-2 overflow-hidden shadow-2xl">
-          <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=800" alt="Showcase" className="w-full h-full object-cover rounded-xl opacity-80" />
+          <img src="/gallery4.jpg" alt="Showcase Portfolio" className="w-full h-full object-cover rounded-xl opacity-80" />
         </div>
       </section>
 
@@ -152,47 +172,56 @@ export default function Home() {
       </section>
 
       {/* 3. WIG SHOP SECTION */}
-      <section id="shop" className="border-t border-zinc-900 py-24 bg-zinc-950/40">
+      <section id="shop" className="border-t border-zinc-900 py-24 bg-zinc-950/40 scroll-mt-24">
         <div className="mx-auto max-w-6xl px-6">
           <div className="mb-12">
             <h2 className="text-3xl font-black flex items-center gap-2"><ShoppingBag className="text-[#D4AF37]" /> The Premium Wig Shop</h2>
             <p className="text-sm text-zinc-400 mt-2">High-grade Vietnamese bundles, HD frontals, and raw human hair systems.</p>
           </div>
           <div className="grid sm:grid-cols-3 gap-6">
-            <div className="bg-zinc-900/50 border border-zinc-900 rounded-xl overflow-hidden">
-              <div className="aspect-square bg-zinc-950 flex items-center justify-center text-zinc-700 text-xs">Premium Bundle Stock View</div>
-              <div className="p-4"><h4 className="font-bold text-sm">Luxury Vietnamese Bundles</h4><p className="text-xs text-zinc-500 mt-1">Raw Human Hair</p></div>
-            </div>
-            <div className="bg-zinc-900/50 border border-zinc-900 rounded-xl overflow-hidden">
-              <div className="aspect-square bg-zinc-950 flex items-center justify-center text-zinc-700 text-xs">HD Frontal Setup View</div>
-              <div className="p-4"><h4 className="font-bold text-sm">Ultra Thin HD Frontal Wig</h4><p className="text-xs text-zinc-500 mt-1">13x4 / 13x6 Grid</p></div>
-            </div>
-            <div className="bg-zinc-900/50 border border-zinc-900 rounded-xl overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1595959183075-c1d09e77b94b?auto=format&fit=crop&q=80&w=600" alt="Unit" className="aspect-square object-cover w-full" />
-              <div className="p-4"><h4 className="font-bold text-sm">Premium Bone Straight Unit</h4><p className="text-xs text-zinc-500 mt-1">Pre-Plucked Double Drawn</p></div>
-            </div>
+            {shopItems.map((item, index) => (
+              <div key={index} className="bg-zinc-900/50 border border-zinc-900 rounded-xl overflow-hidden flex flex-col justify-between">
+                <div className="w-full aspect-square bg-zinc-950 relative overflow-hidden">
+                  <img 
+                    src={item.img} 
+                    alt={item.title} 
+                    className="w-full h-full object-cover onError={(e) => { e.currentTarget.style.display = 'none' }}" 
+                  />
+                </div>
+                <div className="p-4 bg-zinc-900/80 border-t border-zinc-900">
+                  <h4 className="font-bold text-sm text-white">{item.title}</h4>
+                  <p className="text-xs text-zinc-500 mt-1">{item.subtitle}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 4. GALLERY SECTION */}
+      {/* 4. GALLERY PORTFOLIO SECTION */}
       <section id="gallery" className="border-t border-zinc-900 py-24 mx-auto max-w-6xl px-6 scroll-mt-24">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-black">Transformation Portfolio Gallery</h2>
           <p className="text-zinc-500 text-sm mt-2">A luxury lookbook showcasing our real salon results.</p>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {galleryItems.map((item) => (
-            <div key={item.title} className="relative aspect-[3/4] rounded-xl overflow-hidden border border-zinc-900 bg-zinc-950 group">
+          {galleryItems.map((item, index) => (
+            <div key={index} className="relative aspect-[3/4] rounded-xl overflow-hidden border border-zinc-900 bg-zinc-950 group">
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10" />
-              <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
-              <div className="absolute bottom-4 left-4 right-4 z-20"><p className="text-xs font-bold text-zinc-300">{item.title}</p></div>
+              <img 
+                src={item.img} 
+                alt={item.title} 
+                className="w-full h-full object-cover group-hover:scale-105 transition duration-500" 
+              />
+              <div className="absolute bottom-4 left-4 right-4 z-20">
+                <p className="text-xs font-bold text-zinc-300">{item.title}</p>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* 5. BOOKING INTAKE FRAME WORK */}
+      {/* 5. BOOKING INTAKE SECTION */}
       <section id="booking" className="border-t border-zinc-900 py-24 max-w-md mx-auto px-6 scroll-mt-24">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-black">Secure Your Slot</h2>
