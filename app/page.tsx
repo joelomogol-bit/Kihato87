@@ -4,31 +4,31 @@ import React, { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { Sparkles, ArrowRight, Calendar, CheckCircle, ShoppingBag } from "lucide-react"
 
-// --- WIG SHOP DATA CONFIGURATION (3 SLOTS) ---
+// --- WIG SHOP DATA CONFIGURATION WITH MATCHING EXTENSIONS ---
 const shopItems = [
   { 
     title: "Luxury Vietnamese Bundles", 
     subtitle: "Raw Human Hair", 
-    img: "/shop1.jpg" 
+    img: "/shop1.jpg.png" 
   },
   { 
     title: "Ultra Thin HD Frontal Wig", 
     subtitle: "13x4 / 13x6 Grid", 
-    img: "/shop2.jpg" 
+    img: "/shop2.jpg.png" 
   },
   { 
     title: "Premium Bone Straight Unit", 
     subtitle: "Pre-Plucked Double Drawn", 
-    img: "/shop3.jpg" 
+    img: "/shop3.jpg.png" 
   }
 ]
 
-// --- PORTFOLIO GALLERY DATA CONFIGURATION (4 SLOTS) ---
+// --- PORTFOLIO GALLERY DATA CONFIGURATION WITH MATCHING EXTENSIONS ---
 const galleryItems = [
-  { title: "Bridal Glow Makeup", img: "/gallery1.jpg" },
-  { title: "Precision Melted Lace Installation", img: "/gallery2.jpg" },
-  { title: "Luxury Volume Weave Extensions", img: "/gallery3.jpg" },
-  { title: "Studio Editorial Photo Styling", img: "/gallery4.jpg" }
+  { title: "Bridal Glow Makeup", img: "/gallery1.jpg.png" },
+  { title: "Precision Melted Lace Installation", img: "/gallery2.jpg.png" },
+  { title: "Luxury Volume Weave Extensions", img: "/gallery3.jpg.png" },
+  { title: "Studio Editorial Photo Styling", img: "/gallery4.jpg.png" }
 ]
 
 // --- WHATSAPP BOOKING INTEGRATION ARCHITECTURE ---
@@ -134,7 +134,7 @@ export default function Home() {
           </div>
         </div>
         <div className="relative aspect-[4/5] rounded-2xl border border-zinc-800 bg-zinc-900 p-2 overflow-hidden shadow-2xl">
-          <img src="/gallery4.jpg" alt="Showcase Portfolio" className="w-full h-full object-cover rounded-xl opacity-80" />
+          <img src="/gallery4.jpg.png" alt="Showcase Portfolio" className="w-full h-full object-cover rounded-xl opacity-80" />
         </div>
       </section>
 
@@ -185,7 +185,7 @@ export default function Home() {
                   <img 
                     src={item.img} 
                     alt={item.title} 
-                    className="w-full h-full object-cover onError={(e) => { e.currentTarget.style.display = 'none' }}" 
+                    className="w-full h-full object-cover" 
                   />
                 </div>
                 <div className="p-4 bg-zinc-900/80 border-t border-zinc-900">
@@ -202,7 +202,7 @@ export default function Home() {
       <section id="gallery" className="border-t border-zinc-900 py-24 mx-auto max-w-6xl px-6 scroll-mt-24">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-black">Transformation Portfolio Gallery</h2>
-          <p className="text-zinc-500 text-sm mt-2">A luxury lookbook showcasing our real salon results.</p>
+          <p className="text-zinc-500 text-sm mt-2">A luxury looklook showcasing our real salon results.</p>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {galleryItems.map((item, index) => (
