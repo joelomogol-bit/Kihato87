@@ -4,7 +4,7 @@ import React, { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { Sparkles, ArrowRight, Calendar, CheckCircle, ShoppingBag } from "lucide-react"
 
-// --- WIG SHOP DATA CONFIGURATION WITH MATCHING EXTENSIONS ---
+// --- WIG SHOP DATA CONFIGURATION WITH CORRECT PUBLIC PATHS ---
 const shopItems = [
   { 
     title: "Luxury Vietnamese Bundles", 
@@ -23,7 +23,7 @@ const shopItems = [
   }
 ]
 
-// --- PORTFOLIO GALLERY DATA CONFIGURATION WITH MATCHING EXTENSIONS ---
+// --- PORTFOLIO GALLERY DATA CONFIGURATION WITH CORRECT PUBLIC PATHS ---
 const galleryItems = [
   { title: "Bridal Glow Makeup", img: "/gallery1.jpg.png" },
   { title: "Precision Melted Lace Installation", img: "/gallery2.jpg.png" },
@@ -52,7 +52,8 @@ function BookingForm() {
     
     setIsSubmitted(true)
     setTimeout(() => {
-      window.open(`https://wa.me/2541166628626?text=${encodeURIComponent(baseText + notesText)}`, "_blank")
+      // Updated target endpoint to the new phone number
+      window.open(`https://wa.me/254116322757?text=${encodeURIComponent(baseText + notesText)}`, "_blank")
       setIsSubmitted(false)
     }, 1200)
   }
@@ -202,7 +203,7 @@ export default function Home() {
       <section id="gallery" className="border-t border-zinc-900 py-24 mx-auto max-w-6xl px-6 scroll-mt-24">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-black">Transformation Portfolio Gallery</h2>
-          <p className="text-zinc-500 text-sm mt-2">A luxury looklook showcasing our real salon results.</p>
+          <p className="text-zinc-500 text-sm mt-2">A luxury lookbook showcasing our real salon results.</p>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {galleryItems.map((item, index) => (
