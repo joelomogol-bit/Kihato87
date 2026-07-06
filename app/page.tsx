@@ -45,7 +45,6 @@ function BookingForm() {
     }
   }, [searchParams])
 
-  // UPDATED: Now submits data to Supabase database first before redirecting to WhatsApp
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitted(true)
@@ -81,7 +80,8 @@ function BookingForm() {
     const notesText = formData.notes ? `\n• Notes: ${formData.notes}` : ""
     
     setTimeout(() => {
-      window.open(`https://wa.me/254116322757?text=${encodeURIComponent(baseText + notesText)}`, "_blank")
+      // UPDATED: WhatsApp target endpoint modified to the new 0116628626 configuration
+      window.open(`https://wa.me/254116628626?text=${encodeURIComponent(baseText + notesText)}`, "_blank")
       setIsSubmitted(false)
     }, 1200)
   }
