@@ -45,14 +45,42 @@ function BookingForm() {
     }
   }, [searchParams])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // UPDATED: Now submits data to Supabase database first before redirecting to WhatsApp
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setIsSubmitted(true)
+
+    try {
+      // 1. Save data to your cloud Supabase database through your API route
+      const response = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          service: selectedService,
+          date: formData.date,
+          time: formData.time,
+          notes: formData.notes || '',
+        }),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        console.error('Database connection sync issue:', result.error)
+      }
+    } catch (error) {
+      console.error('Failed to submit booking row data:', error)
+    }
+
+    // 2. Open WhatsApp immediately after processing backend storage tracking
     const baseText = `Hi Samy, I'd like to book an appointment!\n\n• Name: ${formData.name}\n• Phone: ${formData.phone}\n• Service: ${selectedService}\n• Date: ${formData.date}\n• Time: ${formData.time}`
     const notesText = formData.notes ? `\n• Notes: ${formData.notes}` : ""
     
-    setIsSubmitted(true)
     setTimeout(() => {
-      // Updated target endpoint to the new phone number
       window.open(`https://wa.me/254116322757?text=${encodeURIComponent(baseText + notesText)}`, "_blank")
       setIsSubmitted(false)
     }, 1200)
